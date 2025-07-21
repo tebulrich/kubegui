@@ -25,7 +25,7 @@ The current version is 1.0.15
 - **Namespace-Specific Operations**: Perform actions within a selected namespace.
 - **Log Management**: Fetch specific or all logs from containers with ease.
 - **Huge File Search**: Search for files larger than 1GB on a selected pod. If no huge files are found, an appropriate message is displayed.
-- **Self-Updating**: Check for and install the latest version from a GitLab repository.
+- **Self-Updating**: Check for and install the latest version from the GitHub repository.
 
 #### Menu Structure
 
@@ -66,7 +66,7 @@ The `kubegui` script provides the following menu options:
     Switch between different Kubernetes configuration files located in `~/.config/kubectl/`. This is useful if you manage multiple clusters or contexts.
 
 11. **Update script**  
-    Check for the latest version of `kubegui` from your GitLab repository and update automatically. Ensure your GitLab token is stored in `~/.config/kubectl/GITLAB_TOKEN` for authentication.
+    Check for the latest version of `kubegui` from the GitHub repository and update automatically. No authentication is required as the repository is public.
 
 - **Exit**  
   You can exit the script at any time by choosing the exit option (typically by entering `q`).

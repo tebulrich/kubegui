@@ -466,23 +466,17 @@ function scan_old_certificates() {
 
 function update_script() {
   echo -e "${BLUE}Checking for updates...${NC}"
-  GITLAB_TOKEN_FILE="$CONFIG_PATH/GITLAB_TOKEN"
-  if [[ ! -f "$GITLAB_TOKEN_FILE" ]]; then
-    echo -e "${RED}GitLab token file not found at $GITLAB_TOKEN_FILE.${NC}"
-    return
-  fi
-  GITLAB_TOKEN=$(cat "$GITLAB_TOKEN_FILE")
-  GITLAB_API_URL="https://git.ky2.local/api/v4"
-  REPO_PATH="common%2Fubuntu-helpers"
-  FILE_PATH="scripts%2Fkubegui"
+  REPO_OWNER="tebulrich"
+  REPO_NAME="kubegui"
+  FILE_PATH="scripts/kubegui"
   REF="main"
-  DOWNLOAD_URL="$GITLAB_API_URL/projects/$REPO_PATH/repository/files/$FILE_PATH/raw?ref=$REF"
+  DOWNLOAD_URL="https://raw.githubusercontent.com/$REPO_OWNER/$REPO_NAME/$REF/$FILE_PATH"
   echo -e "${BLUE}Downloading the latest version...${NC}"
-  HTTP_RESPONSE=$(curl -s -w "%{http_code}" --header "PRIVATE-TOKEN: $GITLAB_TOKEN" "$DOWNLOAD_URL" -o /tmp/kubegui)
+  HTTP_RESPONSE=$(curl -s -w "%{http_code}" "$DOWNLOAD_URL" -o /tmp/kubegui)
   if [[ "$HTTP_RESPONSE" -ne 200 ]]; then
     echo -e "${RED}Failed to download the latest version. HTTP Status: $HTTP_RESPONSE${NC}"
     echo -e "${BLUE}To debug, try running the following command manually:${NC}"
-    echo -e "${YELLOW}curl --header 'PRIVATE-TOKEN: $GITLAB_TOKEN' '$DOWNLOAD_URL'${NC}"
+    echo -e "${YELLOW}curl '$DOWNLOAD_URL'${NC}"
     return
   fi
   echo -e "${BLUE}Updating the script...${NC}"
